@@ -1,0 +1,1 @@
+ifconfig eth0 145.63.32.2 netmask 255.255.255.128 broadcast 145.63.32.127
