@@ -2,11 +2,29 @@
 /sbin/ifconfig eth1 up
 /sbin/ifconfig eth2 up
 
-brctl addbr br0       # creates a bridging process  called br0
-brctl addif br0 eth0  # tells br0 to switch frames from/to eth0
-brctl addif br0 eth1  # tells br0 to switch frames from/to eth1
-brctl addif br0 eth2  # tells br0 to switch frames from/to eth2
-brctl stp br0 on      # enable the spanning tree protocol
+#brctl addbr br0       # creates a bridging process  called br0
+#brctl addif br0 eth0  # tells br0 to switch frames from/to eth0
+#brctl addif br0 eth1  # tells br0 to switch frames from/to eth1
+#brctl addif br0 eth2  # tells br0 to switch frames from/to eth2
+#brctl addif br0 eth3  # tells br0 to switch frames from/to eth3
+#brctl stp br0 on      # enable the spanning tree protocol
 
-/sbin/ifconfig br0 up # starts br0
+#/sbin/ifconfig br0 up # starts br0
 
+vconfig add eth0 10
+vconfig add eth0 20
+
+/sbin/ifconfig eth0.10 up
+/sbin/ifconfig eth0.20 up
+
+brctl addbr vlan100
+brctl addbr vlan200
+brctl addif vlan100 eth0.10
+brctl addif vlan200 eth0.20
+brctl addif vlan200 eth1
+brctl addif vlan100 eth2
+brctl stp vlan100 on
+brctl stp vlan200 on
+
+/sbin/ifconfig vlan100 up
+/sbin/ifconfig vlan200 up
