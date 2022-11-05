@@ -1,4 +1,6 @@
-ifconfig eth0 145.63.37.146 netmask 255.255.255.240 broadcast 145.63.37.159
+ifconfig eth0:1 145.63.37.146 netmask 255.255.255.240 broadcast 145.63.37.159
+ifconfig eth0:2 145.63.37.147 netmask 255.255.255.240 broadcast 145.63.37.159
+ifconfig eth0:3 145.63.37.148 netmask 255.255.255.240 broadcast 145.63.37.159
 ifconfig eth1 192.168.254.1 netmask 255.255.255.248 broadcast 192.168.254.7
 
 route add default gw 145.63.37.145 dev eth0
