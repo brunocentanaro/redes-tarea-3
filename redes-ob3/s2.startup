@@ -1,30 +1,26 @@
-/sbin/ifconfig eth0 up
-/sbin/ifconfig eth1 up
-/sbin/ifconfig eth2 up
+ifconfig eth0 up
+ifconfig eth1 up
+ifconfig eth2 up
 
-#brctl addbr br0       # creates a bridging process  called br0
-#brctl addif br0 eth0  # tells br0 to switch frames from/to eth0
-#brctl addif br0 eth1  # tells br0 to switch frames from/to eth1
-#brctl addif br0 eth2  # tells br0 to switch frames from/to eth2
-#brctl addif br0 eth3  # tells br0 to switch frames from/to eth3
-#brctl stp br0 on      # enable the spanning tree protocol
 
-#/sbin/ifconfig br0 up # starts br0
+#trunk en 0
+vconfig add eth0 100   # Agrega VLAN 100 al puerto 0
+vconfig add eth0 200   # Agrega VLAN 200 al puerto 0
+ifconfig eth0.100 up   # Activa interface pto0.vlan100
+ifconfig eth0.200 up   # Activa interface pto0.vlan200
 
-vconfig add eth0 10
-vconfig add eth0 20
+brctl addbr br100       # Crea bridge br100 (asociado a VLAN 100)
+brctl addif br100 eth1  # Agrega el puerto 1 al bridge br100
 
-/sbin/ifconfig eth0.10 up
-/sbin/ifconfig eth0.20 up
+brctl addbr br200       # Crea bridge br200 (asociado a VLAN 200)
+brctl addif br200 eth2  # Agrega el puerto 2 al bridge br200
 
-brctl addbr vlan100
-brctl addbr vlan200
-brctl addif vlan100 eth0.10
-brctl addif vlan200 eth0.20
-brctl addif vlan200 eth1
-brctl addif vlan100 eth2
-brctl stp vlan100 on
-brctl stp vlan200 on
+#agrego interfaces virtuales a los bridges
+brctl addif br100 eth0.100
+brctl addif br200 eth0.200
 
-/sbin/ifconfig vlan100 up
-/sbin/ifconfig vlan200 up
+brctl stp br100 on      # Activa el STP en el bridge br100
+ifconfig br100 up       # Activa bridge br100
+
+brctl stp br200 on      # Activa el STP en el bridge br200
+ifconfig br200 up       # Activa bridge br200
