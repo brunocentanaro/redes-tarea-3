@@ -1,0 +1,6 @@
+/etc/init.d/quagga start
+
+iptables -t nat -A POSTROUTING -s 192.168.254.4 -o eth0 -j SNAT --to 145.63.37.148
+iptables -t nat -A POSTROUTING -s 145.63.37.148 -o eth1 -j SNAT --to 192.168.254.4
+
+iptables -t nat -A PREROUTING -s 145.63.37.148  -j SNAT --to 192.168.254.4
