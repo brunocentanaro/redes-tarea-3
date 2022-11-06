@@ -9,11 +9,10 @@ ifconfig eth0.100 up   # Activa interface pto0.vlan100
 ifconfig eth0.200 up   # Activa interface pto0.vlan200
 
 brctl addbr br100       # Crea bridge br100 (asociado a VLAN 100)
-brctl addif br100 eth2  # Agrega el puerto 2 al bridge br100
+brctl addif br100 eth1  # Agrega el puerto 2 al bridge br100
 
 brctl addbr br200       # Crea bridge br200 (asociado a VLAN 200)
-brctl addif br200 eth1  # Agrega el p
-uerto 1 al bridge br200
+brctl addif br200 eth2  # Agrega el puerto 1 al bridge br200
 
 #agrego interfaces virtuales a los bridges
 brctl addif br100 eth0.100
