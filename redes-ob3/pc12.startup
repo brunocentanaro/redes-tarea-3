@@ -1,1 +1,1 @@
-ifconfig eth0 172.21.1.12 netmask 255.255.255.0 broadcast 172.21.1.255
+ /etc/init.d/networking restart
