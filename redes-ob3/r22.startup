@@ -8,4 +8,7 @@ ifconfig eth1.200 172.21.2.1 netmask 255.255.255.0 broadcast 172.21.2.255
 
 route add default gw 192.168.254.1 dev eth0
 
+iptables -t nat -A POSTROUTING -s 172.21.2.0/24 -o eth0 -j SNAT --to 192.168.254.2
+iptables -t nat -A POSTROUTING -s 172.21.1.0/24 -o eth0 -j SNAT --to 192.168.254.2
+
 /etc/init.d/isc-dhcp-server start
