@@ -2,11 +2,11 @@ ifconfig eth1 up
 vconfig add eth1 100   # Agrega VLAN 100 al puerto 1
 vconfig add eth1 200   # Agrega VLAN 200 al puerto 1
 
-ifconfig eth0 192.168.254.2 netmask 255.255.255.248 broadcast 192.168.254.7
+ifconfig eth0 145.63.37.146 netmask 255.255.255.248 broadcast 192.168.254.151
 ifconfig eth1.100 172.21.1.1 netmask 255.255.255.0 broadcast 172.21.1.255
 ifconfig eth1.200 172.21.2.1 netmask 255.255.255.0 broadcast 172.21.2.255
 
-route add default gw 192.168.254.1 dev eth0
+route add default gw 145.63.37.145 dev eth0
 
 iptables -t nat -A POSTROUTING -s 172.21.2.0/24 -o eth0 -j SNAT --to 192.168.254.2
 iptables -t nat -A POSTROUTING -s 172.21.1.0/24 -o eth0 -j SNAT --to 192.168.254.2
