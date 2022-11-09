@@ -1,10 +1,14 @@
-ifconfig eth0:1 145.63.37.146 netmask 255.255.255.240 broadcast 145.63.37.159
-ifconfig eth0:2 145.63.37.147 netmask 255.255.255.240 broadcast 145.63.37.159
-ifconfig eth0:3 145.63.37.148 netmask 255.255.255.240 broadcast 145.63.37.159
+ifconfig eth0 192.168.0.2 netmask 255.255.255.252 broadcast 192.168.0.3
 ifconfig eth1 192.168.254.1 netmask 255.255.255.248 broadcast 192.168.254.7
 
-route add default gw 145.63.37.145 dev eth0
+route add default gw 192.168.0.2 dev eth0
 
-iptables -t nat -A PREROUTING -i eth0 -d 145.63.37.148 -j DNAT --to 192.168.254.4
-iptables -t nat -A PREROUTING -i eth0 -d 145.63.37.147 -j DNAT --to 192.168.254.3
+
 iptables -t nat -A POSTROUTING -s 192.168.254.2 -o eth0 -j SNAT --to 145.63.37.146
+iptables -t nat -A POSTROUTING -s 192.168.254.3 -o eth0 -j SNAT --to 145.63.37.147
+iptables -t nat -A POSTROUTING -s 192.168.254.4 -o eth0 -j SNAT --to 145.63.37.148
+
+
+iptables -t nat -A POSTROUTING -s 145.63.37.146 -o eth1 -j SNAT --to 192.168.254.2
+iptables -t nat -A POSTROUTING -s 145.63.37.147 -o eth1 -j SNAT --to 192.168.254.3
+iptables -t nat -A POSTROUTING -s 145.63.37.148 -o eth1 -j SNAT --to 192.168.254.4

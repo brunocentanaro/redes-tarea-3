@@ -1,5 +1,7 @@
-ifconfig eth0 145.63.37.145 netmask 255.255.255.240 broadcast 145.63.37.159
+ifconfig eth0 192.168.0.1 netmask 255.255.255.252 broadcast 192.168.0.3
 ifconfig eth1 10.0.2.1 netmask 255.255.255.0 broadcast 10.0.2.255
 ifconfig eth2 10.0.3.2 netmask 255.255.255.0 broadcast 10.0.3.255
+
+route add -net 145.63.37.144 netmask 255.255.255.240 gw 192.168.0.2 eth0
 
 /etc/init.d/quagga start
